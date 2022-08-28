@@ -12,7 +12,9 @@ contract Prescription {
         string pastMedications;
         string outstandingPresecriptions;
         string pastProcedures;
-        string diseaseHistory;
+        string diseaseHistory
+        string allergies;
+        string ohip;
         string clinicianNotes;
 
         bool dataUsageAgreement;
@@ -38,7 +40,7 @@ contract Prescription {
     
     public {
         patientCount++;
-        patientsById[patientCount] = PatientDatabase(patientCount, _firstName, _lastName, _age, _currentMedications, _pastMedications, _outstandingPresecriptions, _pastProcedures, _illnessHistory, _clinicianNotes, _dataUsageAgreement);
+        patientsById[patientCount] = PatientDatabase(patientCount, _firstName, _lastName, _age, _currentMedications, _pastMedications, _outstandingPresecriptions, _pastProcedures, _illnessHistory, _allergies, _ohip, _clinicianNotes, _dataUsageAgreement);
 
     }
 
