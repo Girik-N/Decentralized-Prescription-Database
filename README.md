@@ -1,4 +1,5 @@
 # Decentralized-Prescription-Database
 Utilizing blockchain technology to create accountability, transparency, and decentralization in opioid prescription tracking.
 
-<img width="906" alt="image" src="https://user-images.githubusercontent.com/93875258/187072723-72ff9c3c-670d-4e1b-bcf3-c720cefb220f.png">
+<img width="719" alt="uplift UI" src="https://user-images.githubusercontent.com/93875258/187073452-8f09bb8b-9ad9-4375-8a9f-bc4835892c96.png">
+
