@@ -1,55 +1,69 @@
-// SPDX-License-Identifier: MIT
+pragma solidity ^0.5.1;
 
-pragma solidity ^0.8.15;
-
-contract ePrescription {
-
-    struct prescriptionInfo {
-        uint id;
-        string patientFullName;
-        string age;
-        string currentMedications;
-        string pastMedications;
-        string outstandingPresecriptions;
-        string illnessHistory;
-        string clinicianFullName;
-        string state;
-        string licenseType;
-        string NPInumber;
-        string prescriptionBrandName;
-        string genericName;
-        string NDCDrugID;
-        string dosageMlMg;
-        string additionalNotes;
-
-        bool dataUsageAgreement;
+contract MedicalDatabase {
+    // Struct to store medical records
+    struct MedicalRecord {
+        string patientName;
+        string doctorName;
+        string disease;
+        string prescription;
     }
-
-    mapping (uint => prescriptionInfo) public patientsById;
-    uint public patientCount;
-
-
-    function addPrescription(
-        string memory _patientFullName, 
-        string memory _age, 
-        string memory _currentMedications, 
-        string memory _pastMedications, 
-        string memory _outstandingPresecriptions, 
-        string memory _illnessHistory, 
-        string memory _clinicianFullName, 
-        string memory _state, 
-        string memory _licenseType, 
-        string memory _NPInumber, 
-        string memory _prescriptionBrandName,
-        string memory _genericName, 
-        string memory _NDCDrugID,
-        string memory _dosageMlMg,
-        string memory _additionalNotes,
-
-        bool _dataUsageAgreement) 
-
-    public {
-        patientCount++;
-        patientsById[patientCount] = prescriptionInfo(patientCount, _patientFullName, _age, _currentMedications, _pastMedications, _outstandingPresecriptions, _illnessHistory, _clinicianFullName, _state, _licenseType, _NPInumber, _prescriptionBrandName, _genericName, _NDCDrugID, _dosageMlMg, _additionalNotes, _dataUsageAgreement);
+    
+    // Create a mapping to store medical records
+    mapping (bytes32 => MedicalRecord) public medicalRecords;
+    
+    // Function to add medical records
+    function addMedicalRecord(
+        bytes32 _hashKey,
+        string memory _patientName,
+        string memory _doctorName,
+        string memory _disease,
+        string memory _prescription
+    ) public
+    {
+        // Create a new medical record
+        MedicalRecord memory _medicalRecord = MedicalRecord(_patientName, _doctorName, _disease, _prescription);
+        // Store the new medical record
+        medicalRecords[_hashKey] = _medicalRecord;
+    }
+    
+    // Function to update existing medical records
+    function updateMedicalRecord(
+        bytes32 _hashKey,
+        string memory _patientName,
+        string memory _doctorName,
+        string memory _disease,
+        string memory _prescription
+    ) public
+    {
+        // Fetch the existing medical record
+        MedicalRecord memory _medicalRecord = medicalRecords[_hashKey];
+        // Update the existing medical record
+        _medicalRecord.patientName = _patientName;
+        _medicalRecord.doctorName = _doctorName;
+        _medicalRecord.disease = _disease;
+        _medicalRecord.prescription = _prescription;
+        // Store the updated medical record
+        medicalRecords[_hashKey] = _medicalRecord;
+    }
+    
+    // Function to delete medical records
+    function deleteMedicalRecord(bytes32 _hashKey) public {
+        // Delete the existing medical record
+        delete medicalRecords[_hashKey];
+    }
+    
+    // Function to query medical records
+    function queryMedicalRecord(bytes32 _hashKey) public view returns (
+        string memory _patientName,
+        string memory _doctorName,
+        string memory _disease,
+        string memory _prescription
+    )
+    {
+        // Fetch the existing medical record
+        MedicalRecord memory _medicalRecord = medicalRecords[_hashKey];
+        // Return the details of the medical record
+        return (_medicalRecord.patientName, _medicalRecord.doctorName, _medicalRecord.disease, _medicalRecord.prescription);
     }
 }
